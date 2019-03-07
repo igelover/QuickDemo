@@ -16,6 +16,7 @@ namespace QuickDemo.API.Controllers
         /// Retrieves the whole list of ToDo items
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public IHttpActionResult GetAll()
         {
             return Ok(toDoList);
@@ -27,6 +28,7 @@ namespace QuickDemo.API.Controllers
         /// <param name="id">Item unique identifier</param>
         /// <returns>A ToDo item with the given ID</returns>
         /// <remarks>If the item is not found, returns a 404 HTTP Code</remarks>
+        [HttpGet]
         public IHttpActionResult GetById(int id)
         {
             var item = toDoList.FirstOrDefault(i => i.Id == id);
@@ -44,6 +46,7 @@ namespace QuickDemo.API.Controllers
         /// <param name="item">The item to add</param>
         /// <returns>The item just added</returns>
         /// <remarks>If there is already an item with the same ID, returns a 409 HTTP Code</remarks>
+        [HttpPost]
         public IHttpActionResult Create([FromBody]ToDoItem item)
         {
             if (item == null)
@@ -66,6 +69,7 @@ namespace QuickDemo.API.Controllers
         /// <param name="item">The item to update</param>
         /// <returns>The item just updated</returns>
         /// <remarks>If the item is not found, returns a 404 HTTP Code</remarks>
+        [HttpPut]
         public IHttpActionResult Update(int id, [FromBody]ToDoItem item)
         {
             if (item == null)
@@ -91,6 +95,7 @@ namespace QuickDemo.API.Controllers
         /// <param name="id">The item's unique identifier</param>
         /// <returns>A 200 HTTP Code</returns>
         /// <remarks>If the item is not found, returns a 404 HTTP Code</remarks>
+        [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             var existing = toDoList.FirstOrDefault(i => i.Id == id);
