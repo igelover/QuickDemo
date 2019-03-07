@@ -46,6 +46,10 @@ namespace QuickDemo.API.Controllers
         /// <remarks>If there is already an item with the same ID, returns a 409 HTTP Code</remarks>
         public IHttpActionResult Create([FromBody]ToDoItem item)
         {
+            if (item == null)
+            {
+                return BadRequest();
+            }
             var existing = toDoList.FirstOrDefault(i => i.Id == item.Id);
             if (existing != null)
             {
@@ -64,6 +68,10 @@ namespace QuickDemo.API.Controllers
         /// <remarks>If the item is not found, returns a 404 HTTP Code</remarks>
         public IHttpActionResult Update(int id, [FromBody]ToDoItem item)
         {
+            if (item == null)
+            {
+                return BadRequest();
+            }
             var existing = toDoList.FirstOrDefault(i => i.Id == item.Id);
             if (existing == null)
             {
@@ -91,6 +99,16 @@ namespace QuickDemo.API.Controllers
                 return NotFound();
             }
             toDoList.Remove(existing);
+            return Ok();
+        }
+
+        /// <summary>
+        /// Deletes the whole list
+        /// </summary>
+        /// <returns>A 200 HTTP Code</returns>
+        public IHttpActionResult DeleteAll()
+        {
+            toDoList.RemoveAll(i => i != null);
             return Ok();
         }
     }
