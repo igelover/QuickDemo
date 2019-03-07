@@ -1,0 +1,15 @@
+<table class="table table-sm table-hover">
+    <tr *ngFor="let item of todoListService.todoList">
+      <td>{{item.Description}}</td>
+      <td>{{item.Priority}}</td>
+      <td>{{item.IsDone}}</td>
+      <td>
+        <a class="btn" (click)="showForEdit(item)">
+          <i class="fa fa-pencil-square-o"></i>
+        </a>
+        <a class="btn text-danger" (click)="onDelete(item.Id)">
+          <i class="fa fa-trash-o"></i>
+        </a>
+      </td>
+    </tr>
+  </table>

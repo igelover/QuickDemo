@@ -53,6 +53,10 @@ namespace QuickDemo.API.Controllers
             {
                 return BadRequest();
             }
+            if (item.Id == 0)
+            {
+                item.Id = toDoList.Count + 1;
+            }
             var existing = toDoList.FirstOrDefault(i => i.Id == item.Id);
             if (existing != null)
             {
