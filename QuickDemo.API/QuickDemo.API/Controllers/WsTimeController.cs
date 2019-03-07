@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Globalization;
 using System.Threading;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace QuickDemo.API.Controllers
 {
@@ -59,15 +60,17 @@ namespace QuickDemo.API.Controllers
         {
             while (true)
             {
-                var message = DateTime.UtcNow.ToString("MMM dd yyyy HH:mm:ss.fff UTC", CultureInfo.InvariantCulture);
-                var buffer = Encoding.UTF8.GetBytes(message);
+                var message = new { Timestamp = DateTime.UtcNow.ToString("MMM dd yyyy HH:mm:ss UTC", CultureInfo.InvariantCulture) };
+                var data = JsonConvert.SerializeObject(message);
+                var encoded = Encoding.UTF8.GetBytes(data);
+                var buffer = new ArraySegment<byte>(encoded, 0, encoded.Length);
 
                 if (ws.State != WebSocketState.Open)
                 {
                     break;
                 }
 
-                var sendTask = ws.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
+                var sendTask = ws.SendAsync(buffer, WebSocketMessageType.Text, true, CancellationToken.None);
                 await sendTask.ConfigureAwait(false);
 
                 if (ws.State != WebSocketState.Open)

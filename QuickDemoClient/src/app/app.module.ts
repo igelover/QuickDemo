@@ -8,13 +8,15 @@ import { TodoListComponent } from './quickdemo/todo-list/todo-list.component';
 import { FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ToastrModule } from 'ngx-toastr';
+import { ClockComponent } from './quickdemo/clock/clock.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuickdemoComponent,
     TodoItemComponent,
-    TodoListComponent
+    TodoListComponent,
+    ClockComponent
   ],
   imports: [
     BrowserModule,

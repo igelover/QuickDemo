@@ -16,7 +16,7 @@ export class TodoListComponent implements OnInit {
   }
 
   showForEdit(item: TodoItem) {
-    this.todoListService.selectedItem = Object.assign({}, item);;
+    this.todoListService.selectedItem = Object.assign({}, item);
   }
 
   onDelete(id: number) {
@@ -25,7 +25,7 @@ export class TodoListComponent implements OnInit {
       .subscribe(x => {
         this.todoListService.getAll();
         alert('Deleted Successfully');
-      })
+      });
     }
   }
 }
